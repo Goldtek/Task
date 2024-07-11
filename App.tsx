@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, FC } from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 
-export default function App() {
+import { AppStyles } from './src/styles/style';
+import { Button } from './src/components';
+import { CreateHexColor } from './src/util';
+
+const App: FC = () => {
+  const [backgroundColor, setBackgroundColor] = useState('#fff');
+
+  const handlePress = () => {
+    setBackgroundColor(CreateHexColor());
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <TouchableOpacity onPress={handlePress} style={[AppStyles.container, { backgroundColor }]}>
+      <Text style={AppStyles.text}>Hello there</Text>
+      {/* This is an added feature incase you just want to use button */}
+       {/* <Button  title="Change Color" onPress={handlePress} />  */}
+    </TouchableOpacity>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
